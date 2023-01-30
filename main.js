@@ -7,6 +7,14 @@ document.querySelectorAll("[data-rps-strategy]").forEach(function (strategyEl) {
     };
 });
 
+document.onkeyup = function (e) {
+    switch (e.key) {
+        case "r": case "R": document.querySelectorAll("[data-rps-play='R']")[0].click(); break;
+        case "p": case "P": document.querySelectorAll("[data-rps-play='P']")[0].click(); break;
+        case "s": case "S": document.querySelectorAll("[data-rps-play='S']")[0].click(); break;
+    }
+};
+
 document.querySelectorAll("[data-rps-play]").forEach(function (playEl) {
     playEl.onclick = function () {
 
