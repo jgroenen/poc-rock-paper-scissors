@@ -19,6 +19,11 @@
                 user-select: none;
                 padding: 10px;
             }
+            .rps-box:active {
+                box-shadow: inset 0 0 5px #000000;
+                background: #666666 !important;
+                color: #FFFFFF;
+            }
             .rps-box[data-rps-move] {
                 cursor: none;
             }
@@ -71,6 +76,17 @@
         <center>
             <canvas width="400" height="10" style="background: #000; max-width: 100%; margin-top: 20px"></canvas>
         </center>
+        <div style="text-align: center">
+            <h1>Autoplay</h1>
+            <div style="flex: 1; text-align: center">
+                <h2>Playing style</h2>
+                <div style="display: flex; text-align: center">
+                    <div class="rps-box" data-autoplay="random">Random</div>
+                    <div class="rps-box" data-autoplay="biased">Biased</div>
+                    <div class="rps-box" data-autoplay>Stop</div>
+                </div>
+            </div>
+        </div>
         <script type="module" src="main.js"></script>
     </body>
 </html>

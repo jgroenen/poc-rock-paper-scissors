@@ -57,5 +57,40 @@ document.querySelectorAll("[data-rps-play]").forEach(function (playEl) {
 
         // Log the player move
         rps.addMove(playEl.dataset.rpsPlay);
-    }
+    };
+});
+
+var interval;
+document.querySelectorAll("[data-autoplay]").forEach(function (autoplayEl) {
+    autoplayEl.onclick = function () {
+
+        // Stop current autoplay mode
+        if (interval) clearInterval(interval);
+        document.querySelectorAll("[data-autoplay]").forEach(function (autoplayEl) {
+            autoplayEl.style.background = "none";
+        });
+
+        switch (autoplayEl.dataset.autoplay) {
+            case "random":
+                interval = setInterval(function () {
+                    var moveEls = document.querySelectorAll('[data-rps-play]');
+                    var moveEl = moveEls[Math.floor(Math.random() * moveEls.length)];
+                    moveEl.click();
+                }, 50);
+                autoplayEl.style.background = "#AAAAAA";
+                break;
+            case "biased":
+                interval = setInterval(function () {
+                    var moveEls = document.querySelectorAll('[data-rps-play]');
+                    var chances = [30, 30, 40];
+                    var chance = Math.floor(Math.random() * 100);
+                    var i;
+                    for (i = 0; chance > chances[i]; chance -= chances[i], ++i);
+                    moveEls[i].click();
+                }, 50);
+                autoplayEl.style.background = "#AAAAAA";
+                break;
+            default: /*void*/;
+        }
+    };
 });
