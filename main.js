@@ -26,12 +26,25 @@ document.querySelectorAll("[data-rps-play]").forEach(function (playEl) {
         });
 
         // Display the winner
-        document.querySelectorAll("[data-rps-winner]").forEach(function (el) {
+        document.querySelectorAll("[data-rps-winner]").forEach(function (winnerEl) {
             var winner = rps.returnWinner({name: "You", move: playEl.dataset.rpsPlay}, {name: "AI", move: move});
-            el.innerHTML = winner;
+            winnerEl.innerHTML = winner;
             document.querySelectorAll(`[data-rps-score="${winner}"]`).forEach(function (scoreEl) {
                 scoreEl.innerHTML++;
             });
+        });
+
+        // Display the graphical bar
+        document.querySelectorAll("canvas").forEach(function (canvasEl) {
+            var ctx = canvasEl.getContext("2d");
+            var score = parseInt(document.querySelectorAll('[data-rps-score="You"]')[0].innerHTML);
+            score = score / (score + parseInt(document.querySelectorAll('[data-rps-score="AI"]')[0].innerHTML));
+
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(0, 0, canvasEl.width, 10);
+
+            ctx.fillStyle = "#FFF000";
+            ctx.fillRect(0, 0, canvasEl.width * score, 10);
         });
 
         // Log the player move
