@@ -1,31 +1,23 @@
-export default function () {
+export default function (strategy) {
     console.log('rock-paper-scissors AI loaded');
 
-    var moveCounts = {
-        "R": 1,
-        "P": 1,
-        "S": 1
-    };
+    loadStrategy(strategy);
 
     /**
-     * Add opponents move to moves memory.
-     * @param {("R"|"P"|"S"))} move
+     * Loads strategy for predicting opponents move.
+     * @param {*} strategy 
      */
-    function addMove(move) {
-        moveCounts[move]++;
+    async function loadStrategy(strategyName) {
+        strategy = new (await import(`./strategies/${strategyName}.mjs`).then(module => module.default))();
+        console.log(`strategy "${strategy.name}" loaded`);
     }
 
     /**
-     * Roulette wheel selects predicted move based on moves memory.
-     * @returns "R", "P" or "S" move
+     * Passes opponents move to strategy.
+     * @param {("R"|"P"|"S"))} move
      */
-    function predictMove() {
-        var total = Object.values(moveCounts).reduce((total, moveCount) => total + moveCount, 0);
-        var random = Math.floor(Math.random() * total);
-        for (var move in moveCounts) {
-            if (moveCounts[move] < random) random -= moveCounts[move];
-            else return move;
-        }
+    function addMove(move) {
+        strategy.addMove(move);
     }
 
     /**
@@ -33,7 +25,7 @@ export default function () {
      * @returns "R", "P" or "S" move
      */
     function getMove() {
-        switch (predictMove()) {
+        switch (strategy.predictMove()) {
             case "R": return "P";
             case "P": return "S";
             case "S": return "R";
@@ -56,6 +48,7 @@ export default function () {
     }
 
     return {
+        loadStrategy,
         addMove,
         getMove,
         returnWinner

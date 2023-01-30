@@ -1,5 +1,11 @@
 import RPS from "./RPS.mjs";
-var rps = new RPS();
+var rps = new RPS("Random");
+
+document.querySelectorAll("[data-rps-strategy]").forEach(function (strategyEl) {
+    strategyEl.onchange = function (e) {
+        rps.loadStrategy(e.target.value);
+    };
+});
 
 document.querySelectorAll("[data-rps-play]").forEach(function (playEl) {
     playEl.onclick = function () {

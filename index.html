@@ -22,11 +22,20 @@
             .rps-box[data-rps-move] {
                 cursor: none;
             }
+            select {
+                font-size: 1em;
+                text-align: center;
+                padding: 10px;
+            }
         </style>
     </head>
     <body>
         <center>
             <h1>Rock Paper Scissors AI</h1>
+            <h2>AI strategy: <select data-rps-strategy>
+                <option>Random</option>
+                <option>RouletteWheel</option>
+            </select></h2>
         </center>
         <div style="display: flex">
             <div style="flex: 1; text-align: center">
