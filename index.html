@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            html, body {
+                font-family: Arial;
+                font-size: 1em;
+            }
+            .rps-box {
+                height: 40px;
+                line-height: 40px;
+                border: 1px solid black;
+                flex: 1;
+                margin: 10px;
+                text-align: center;
+                font-size: 0.9em;
+                cursor: pointer;
+                user-select: none;
+            }
+            .rps-box[data-rps-move] {
+                cursor: none;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <h1>Rock Paper Scissors AI</h1>
+        </center>
+        <div style="display: flex">
+            <div style="flex: 1; text-align: center">
+                <h2>Your move</h2>
+                <div style="display: flex; text-align: center">
+                    <div class="rps-box" data-rps-play="R">Rock</div>
+                    <div class="rps-box" data-rps-play="P">Paper</div>
+                    <div class="rps-box" data-rps-play="S">Scissors</div>
+                </div>
+            </div>
+            <div style="flex: 1; text-align: center">
+                <h2>AI move</h2>
+                <div style="display: flex; text-align: center">
+                    <div class="rps-box" data-rps-move></div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <h2>Winner: <span data-rps-winner></span></h2>
+        </div>
+        <div style="display: flex">
+            <div style="flex: 1; text-align: center">
+                <h2>Your wins:</h2>
+                <div style="text-align: center" data-rps-score="You">0</div>
+            </div>
+            <div style="flex: 1; text-align: center">
+                <h2>AI wins:</h2>
+                <div style="text-align: center" data-rps-score="AI">0</div>
+            </div>
+        </div>
+        <script type="module" src="main.js"></script>
+    </body>
+</html>
