@@ -20,9 +20,9 @@ document.querySelectorAll("[data-rps-play]").forEach(function (playEl) {
 
         // Highlight the player move
         document.querySelectorAll("[data-rps-play]").forEach(function (playEl) {
-            playEl.style.background = "none";
+            playEl.classList.remove('active');
         });
-        playEl.style.background = "#99FF99";
+        playEl.classList.add('active');
 
         // Get the AI move
         var move = rps.getMove();
@@ -67,7 +67,7 @@ document.querySelectorAll("[data-autoplay]").forEach(function (autoplayEl) {
         // Stop current autoplay mode
         if (interval) clearInterval(interval);
         document.querySelectorAll("[data-autoplay]").forEach(function (autoplayEl) {
-            autoplayEl.style.background = "none";
+            autoplayEl.classList.remove('active');
         });
 
         switch (autoplayEl.dataset.autoplay) {
@@ -77,7 +77,7 @@ document.querySelectorAll("[data-autoplay]").forEach(function (autoplayEl) {
                     var moveEl = moveEls[Math.floor(Math.random() * moveEls.length)];
                     moveEl.click();
                 }, 50);
-                autoplayEl.style.background = "#AAAAAA";
+                autoplayEl.classList.add('active');
                 break;
             case "biased":
                 interval = setInterval(function () {
@@ -88,7 +88,7 @@ document.querySelectorAll("[data-autoplay]").forEach(function (autoplayEl) {
                     for (i = 0; chance > chances[i]; chance -= chances[i], ++i);
                     moveEls[i].click();
                 }, 50);
-                autoplayEl.style.background = "#AAAAAA";
+                autoplayEl.classList.add('active');
                 break;
             default: /*void*/;
         }
